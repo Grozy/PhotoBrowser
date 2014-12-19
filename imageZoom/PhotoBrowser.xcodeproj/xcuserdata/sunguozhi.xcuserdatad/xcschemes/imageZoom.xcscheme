@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8CA2BD601A09CEDA00219872"
-               BuildableName = "imageZoom.app"
-               BlueprintName = "imageZoom"
-               ReferencedContainer = "container:imageZoom.xcodeproj">
+               BuildableName = "PhotoBrowser.app"
+               BlueprintName = "PhotoBrowser"
+               ReferencedContainer = "container:PhotoBrowser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8CA2BD791A09CEDA00219872"
-               BuildableName = "imageZoomTests.xctest"
-               BlueprintName = "imageZoomTests"
-               ReferencedContainer = "container:imageZoom.xcodeproj">
+               BuildableName = "PhotoBrowserTests.xctest"
+               BlueprintName = "PhotoBrowserTests"
+               ReferencedContainer = "container:PhotoBrowser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8CA2BD791A09CEDA00219872"
-               BuildableName = "imageZoomTests.xctest"
-               BlueprintName = "imageZoomTests"
-               ReferencedContainer = "container:imageZoom.xcodeproj">
+               BuildableName = "PhotoBrowserTests.xctest"
+               BlueprintName = "PhotoBrowserTests"
+               ReferencedContainer = "container:PhotoBrowser.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8CA2BD601A09CEDA00219872"
-            BuildableName = "imageZoom.app"
-            BlueprintName = "imageZoom"
-            ReferencedContainer = "container:imageZoom.xcodeproj">
+            BuildableName = "PhotoBrowser.app"
+            BlueprintName = "PhotoBrowser"
+            ReferencedContainer = "container:PhotoBrowser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8CA2BD601A09CEDA00219872"
-            BuildableName = "imageZoom.app"
-            BlueprintName = "imageZoom"
-            ReferencedContainer = "container:imageZoom.xcodeproj">
+            BuildableName = "PhotoBrowser.app"
+            BlueprintName = "PhotoBrowser"
+            ReferencedContainer = "container:PhotoBrowser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8CA2BD601A09CEDA00219872"
-            BuildableName = "imageZoom.app"
-            BlueprintName = "imageZoom"
-            ReferencedContainer = "container:imageZoom.xcodeproj">
+            BuildableName = "PhotoBrowser.app"
+            BlueprintName = "PhotoBrowser"
+            ReferencedContainer = "container:PhotoBrowser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

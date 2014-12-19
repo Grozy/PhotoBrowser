@@ -214,23 +214,7 @@
     }
 }
 
-#pragma MARK -scrollView
 #pragma mark - scrollview delegate
-//- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
-//{
-//    for(id subView in scrollView.subviews)
-//    {
-//        if([subView isKindOfClass:[UIImageView class]])
-//        {
-//            UIImageView *zoomImage = subView;
-//            CGRect endFrame = CGRectIntersection(zoomImage.frame, self.view.bounds);
-//            if (endFrame.size.height < self.view.frame.size.height || endFrame.size.width <self.view.frame.size.width)
-//            {
-//                zoomImage.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height / 2);
-//            }
-//        }
-//    }
-//}
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {

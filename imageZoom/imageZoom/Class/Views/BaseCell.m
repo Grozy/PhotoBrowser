@@ -21,16 +21,6 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (void)setImages:(NSArray *)array
 {
     for(int i= 0;i < array.count;i++)
@@ -45,7 +35,9 @@
         imageView.tag = KBaseTag + i;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
         [imageView addGestureRecognizer:tap];
+        
         PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:imageView];
+        zoomItem.url = array[i]
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];
     }

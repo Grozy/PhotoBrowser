@@ -18,13 +18,40 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
 {
     BOOL isZoom;
 }
+
+/**
+ * 存放缩略图的image
+ */
 @property (nonatomic,strong) UIImage *image;
+
+/**
+ * 存放缩略图的UIImageView 用于做返回动画
+ */
 @property (nonatomic,strong) UIImageView *thmImageView;
+
+/**
+ * 用于存放图像，通过UIScrollView的zoom功能来进行图片的缩放
+ */
 @property (nonatomic,strong) UIScrollView *zoomView;
+
+/**
+ * 获得缩率图像在前一视图中window中的位置，用于做动画变换的初始值
+ */
 @property (nonatomic,assign) CGRect translateFrame;
-@property (nonatomic,copy) NSString *imageName;
+
+/**
+ * 存放高清图的url
+ */
 @property (nonatomic, strong) NSURL *url;
+
+/**
+ * 判断是否加载过，如果家再过就不再去显示进程条
+ */
 @property (nonatomic,assign) BOOL isLoaded;
+
+/**
+ * 用于完成回调
+ */
 @property (nonatomic,copy) finishBlock block;
 
 @end

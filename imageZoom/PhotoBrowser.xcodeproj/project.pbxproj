@@ -34,12 +34,12 @@
 		8CEF7BEA1A4405C100F894C3 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BE41A4405C100F894C3 /* PhotoItem.m */; };
 		8CEF7BEB1A4405C100F894C3 /* BrowserToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BE71A4405C100F894C3 /* BrowserToolbar.m */; };
 		8CEF7BFC1A4406BD00F894C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BEE1A4406BD00F894C3 /* AppDelegate.m */; };
-		8CEF7BFD1A4406BD00F894C3 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BF11A4406BD00F894C3 /* BaseCell.m */; };
 		8CEF7BFE1A4406BD00F894C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BF41A4406BD00F894C3 /* ViewController.m */; };
 		8CEF7BFF1A4406BD00F894C3 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF7BF81A4406BD00F894C3 /* 0.png */; };
 		8CEF7C001A4406BD00F894C3 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF7BF91A4406BD00F894C3 /* 1.png */; };
 		8CEF7C011A4406BD00F894C3 /* 2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF7BFA1A4406BD00F894C3 /* 2.PNG */; };
 		8CEF7C021A4406BD00F894C3 /* 3.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF7BFB1A4406BD00F894C3 /* 3.PNG */; };
+		8CEF7C051A44078300F894C3 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7C041A44078300F894C3 /* BaseCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,14 +108,14 @@
 		8CEF7BE71A4405C100F894C3 /* BrowserToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserToolbar.m; sourceTree = "<group>"; };
 		8CEF7BED1A4406BD00F894C3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8CEF7BEE1A4406BD00F894C3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8CEF7BF01A4406BD00F894C3 /* BaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCell.h; sourceTree = "<group>"; };
-		8CEF7BF11A4406BD00F894C3 /* BaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCell.m; sourceTree = "<group>"; };
 		8CEF7BF31A4406BD00F894C3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8CEF7BF41A4406BD00F894C3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8CEF7BF81A4406BD00F894C3 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
 		8CEF7BF91A4406BD00F894C3 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		8CEF7BFA1A4406BD00F894C3 /* 2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.PNG; sourceTree = "<group>"; };
 		8CEF7BFB1A4406BD00F894C3 /* 3.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.PNG; sourceTree = "<group>"; };
+		8CEF7C031A44078300F894C3 /* BaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCell.h; sourceTree = "<group>"; };
+		8CEF7C041A44078300F894C3 /* BaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,8 +306,6 @@
 		8CEF7BEF1A4406BD00F894C3 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				8CEF7BF01A4406BD00F894C3 /* BaseCell.h */,
-				8CEF7BF11A4406BD00F894C3 /* BaseCell.m */,
 				8CEF7BF21A4406BD00F894C3 /* Controllers */,
 				8CEF7BF51A4406BD00F894C3 /* Models */,
 				8CEF7BF61A4406BD00F894C3 /* Views */,
@@ -334,6 +332,8 @@
 		8CEF7BF61A4406BD00F894C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8CEF7C031A44078300F894C3 /* BaseCell.h */,
+				8CEF7C041A44078300F894C3 /* BaseCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -460,8 +460,8 @@
 				8CEF7BE91A4405C100F894C3 /* ZoomViewController.m in Sources */,
 				8CA2BDD21A0A234700219872 /* UIAlertView+AFNetworking.m in Sources */,
 				8CA2BDCE1A0A234700219872 /* AFURLResponseSerialization.m in Sources */,
+				8CEF7C051A44078300F894C3 /* BaseCell.m in Sources */,
 				8CA2BDD31A0A234700219872 /* UIButton+AFNetworking.m in Sources */,
-				8CEF7BFD1A4406BD00F894C3 /* BaseCell.m in Sources */,
 				8CA2BDD11A0A234700219872 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8CA2BDCD1A0A234700219872 /* AFURLRequestSerialization.m in Sources */,
 				8CA2BDD01A0A234700219872 /* AFNetworkActivityIndicatorManager.m in Sources */,

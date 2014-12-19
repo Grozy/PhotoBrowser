@@ -8,11 +8,15 @@
 
 #import "PhotosBroswerController.h"
 #import "ZoomViewController.h"
+#import "BrowserToolbar.h"
 #import "ZoomItem.h"
 
 #define KSpace 20   //图片之间的间隙
+#define KToolBarHeight  44  //boolBar的高度
+
 @interface PhotosBroswerController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *mainScrollView;
+@property (nonatomic, strong) BrowserToolbar *toolBar;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
 
@@ -42,6 +46,12 @@
     [self setUp];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.toolBar hidden:.7];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -52,9 +62,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 - (void)setUp
+{
+    [self initScrollView];
+    [self addPhotosInScrollView];
+    
+    self.toolBar = [[BrowserToolbar alloc] initWithFrame:(CGRect){
+        {0   ,[UIScreen mainScreen].bounds.size.height - KToolBarHeight},
+        {[UIScreen mainScreen].bounds.size.width   ,KToolBarHeight}
+    }];
+    [self.toolBar setCurrentPageNumber:self.currentIndex + 1 andTotoal:self.photos.count];
+    self.toolBar.backgroundColor = [UIColor lightGrayColor];
+    self.toolBar.alpha = 0.9;
+    [self.view addSubview:self.toolBar];
+}
+
+- (void)initScrollView
 {
     CGSize mainScreenSize = [UIScreen mainScreen].bounds.size;
     
@@ -70,7 +93,11 @@
     self.mainScrollView.contentOffset = CGPointMake(_currentIndex * (mainScreenSize.width + KSpace), 0);
     
     [self.view addSubview:self.mainScrollView];
-    
+}
+
+- (void)addPhotosInScrollView
+{
+    CGSize mainScreenSize = [UIScreen mainScreen].bounds.size;
     [self.photos enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         UIView *zoomView = [[UIView alloc] initWithFrame:CGRectMake(idx * (KSpace + mainScreenSize.width), 0, mainScreenSize.width,mainScreenSize.height)];
@@ -94,13 +121,26 @@
 }
 
 #pragma mark ScrollView Delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.toolBar show:0.3f];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    [self.toolBar hidden:0.7];
     [self setCurrentPage:(self.mainScrollView.contentOffset.x + KSpace)/(self.view.frame.size.width + KSpace)];
 }
 
 - (void)setCurrentPage:(NSInteger)pageIndex
 {
+    [self.toolBar setCurrentPageNumber:pageIndex + 1];
     [self.zoomViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ZoomViewController *zoomViewController = obj;
         if (pageIndex == idx)
@@ -115,14 +155,4 @@
     }];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 @end

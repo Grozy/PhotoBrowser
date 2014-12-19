@@ -32,6 +32,8 @@
         self.block = block;
         self.view.backgroundColor = [UIColor blackColor];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        
+        
     }
     return self;
 }

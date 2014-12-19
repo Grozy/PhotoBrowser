@@ -49,7 +49,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.toolBar hidden:.7];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.toolBar hidden:.7];
+    });
 }
 
 - (void)viewDidLoad {

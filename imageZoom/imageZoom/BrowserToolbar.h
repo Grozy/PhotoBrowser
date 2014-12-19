@@ -15,7 +15,7 @@
 @property (nonatomic, assign) NSInteger totoalPage;
 
 - (void)setCurrentPageNumber:(NSInteger)page;
-- (void)firstPage:(NSInteger)page;
+
 - (void)setCurrentPageNumber:(NSInteger)page andTotoal:(NSInteger)totoalPage;
 - (void)hidden:(NSTimeInterval)duration;
 - (void)show:(NSTimeInterval)duration;

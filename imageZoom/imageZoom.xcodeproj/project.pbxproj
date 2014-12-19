@@ -39,6 +39,7 @@
 		8CA2BDD51A0A234700219872 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2BDC41A0A234700219872 /* UIProgressView+AFNetworking.m */; };
 		8CA2BDD61A0A234700219872 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2BDC61A0A234700219872 /* UIWebView+AFNetworking.m */; };
 		8CA2BDD91A0A296500219872 /* MyConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2BDD81A0A296500219872 /* MyConnectionOperation.m */; };
+		8CD8E4B41A43FEEB002E85C2 /* BrowserToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8E4B31A43FEEB002E85C2 /* BrowserToolbar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		8CA2BDC61A0A234700219872 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		8CA2BDD71A0A296500219872 /* MyConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConnectionOperation.h; sourceTree = "<group>"; };
 		8CA2BDD81A0A296500219872 /* MyConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConnectionOperation.m; sourceTree = "<group>"; };
+		8CD8E4B21A43FEEB002E85C2 /* BrowserToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserToolbar.h; sourceTree = "<group>"; };
+		8CD8E4B31A43FEEB002E85C2 /* BrowserToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserToolbar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +157,8 @@
 		8CA2BD631A09CEDA00219872 /* imageZoom */ = {
 			isa = PBXGroup;
 			children = (
+				8CD8E4B21A43FEEB002E85C2 /* BrowserToolbar.h */,
+				8CD8E4B31A43FEEB002E85C2 /* BrowserToolbar.m */,
 				8CA2BDA21A0A234700219872 /* AFNetworking */,
 				8CA2BD681A09CEDA00219872 /* AppDelegate.h */,
 				8CA2BD691A09CEDA00219872 /* AppDelegate.m */,
@@ -387,6 +392,7 @@
 				8CA2BDD61A0A234700219872 /* UIWebView+AFNetworking.m in Sources */,
 				8CA2BDD91A0A296500219872 /* MyConnectionOperation.m in Sources */,
 				8CA2BD9B1A09D83E00219872 /* PhotosBroswerController.m in Sources */,
+				8CD8E4B41A43FEEB002E85C2 /* BrowserToolbar.m in Sources */,
 				8CA2BDC91A0A234700219872 /* AFHTTPSessionManager.m in Sources */,
 				8CA2BDA11A0A036200219872 /* ZoomItem.m in Sources */,
 				8CA2BDCA1A0A234700219872 /* AFNetworkReachabilityManager.m in Sources */,

@@ -27,20 +27,20 @@
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_pageLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 
-- (void)firstPage:(NSInteger)page
-{
-    _pageLabel.text = [NSString stringWithFormat:@"%d/%d",page,_totoalPage];
-}
-
 - (void)setCurrentPageNumber:(NSInteger)page
 {
-    _pageLabel.text = [NSString stringWithFormat:@"%d/%d",page,_totoalPage];
+    [self setPage:page];
 }
 
 - (void)setCurrentPageNumber:(NSInteger)page andTotoal:(NSInteger)totoalPage
 {
     _totoalPage = totoalPage;
-    _pageLabel.text = [NSString stringWithFormat:@"%d/%d",page,_totoalPage];
+    [self setPage:page];
+}
+
+- (void)setPage:(NSInteger)page
+{
+    _pageLabel.text = [NSString stringWithFormat:@"%ld/%ld",page,_totoalPage];
 }
 
 - (void)hidden:(NSTimeInterval)duration

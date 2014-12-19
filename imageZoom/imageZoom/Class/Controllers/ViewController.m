@@ -66,7 +66,9 @@
 
 - (void)imageClick:(UIImageView *)imageView thumImageArray:(NSArray *)thumArray atIndex:(NSInteger)index
 {
-    PhotosBrowserController *zoomViewsViewController = [[PhotosBrowserController alloc] initWithImageArr:thumArray imageIndex:index];
+    PhotosBrowserController *zoomViewsViewController = [[PhotosBrowserController alloc] initWithImageArr:thumArray imageIndex:index finish:^(BOOL isCurrent) {
+        
+    }];
     [self presentViewController:zoomViewsViewController animated:NO completion:nil];
 }
 @end

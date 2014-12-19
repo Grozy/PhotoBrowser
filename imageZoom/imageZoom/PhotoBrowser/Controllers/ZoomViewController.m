@@ -9,6 +9,7 @@
 #import "ZoomViewController.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
+
 typedef NS_ENUM(NSUInteger, ActionSheetIndex)
 {
     SavePic,
@@ -30,14 +31,15 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
 
 @implementation ZoomViewController
 
-- (instancetype)initWithImageView:(PhotoItem *)zoomItem finish:(finishBlock)block;
+#pragma mark lift cycle
+- (instancetype)initWithImageView:(PhotoItem *)photoItem finish:(finishBlock)block;
 {
     if (self = [super init])
     {
-        self.image = [zoomItem.thumImageView.image copy];
-        self.thmImageView = zoomItem.thumImageView;
-        self.translateFrame = zoomItem.itemFrame;
-        self.url = [NSURL URLWithString:[zoomItem.url stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"]];
+        self.image = [photoItem.thumImageView.image copy];
+        self.thmImageView = photoItem.thumImageView;
+        self.translateFrame = photoItem.itemFrame;
+        self.url = [NSURL URLWithString:photoItem.urlString];
         self.block = block;
         self.isLoaded = YES;
         isZoom = NO;
@@ -55,34 +57,6 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     [self initZoomView];
     
     [self initImageView];
-    
-}
-
-- (void)initImageView
-{
-    self.imageView = [[UIImageView alloc] initWithFrame:self.translateFrame];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.imageView.image = self.image;
-    self.imageView.frame = self.translateFrame;
-    [self.imageView.layer setMasksToBounds:YES];
-    [self.zoomView addSubview:self.imageView];
-}
-
-- (void)initZoomView
-{
-    self.zoomView = [[UIScrollView alloc] init];
-    self.zoomView.delegate = self;
-    self.zoomView.frame = self.view.bounds;
-    self.zoomView.minimumZoomScale = 1;
-    self.zoomView.maximumZoomScale = 3.0;
-    self.zoomView.scrollEnabled = YES;
-    self.zoomView.showsHorizontalScrollIndicator = NO;
-    self.zoomView.showsVerticalScrollIndicator = NO;
-    self.zoomView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self addGestureRecognizerOn:self.zoomView];
-    CGFloat x = (self.image.size.width / self.image.size.height);
-    self.zoomView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width / x);
-    [self.view addSubview:self.zoomView];
     
 }
 
@@ -112,7 +86,7 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     scale.toValue = [NSValue valueWithCGRect:[self getFrameByImageSize:self.image.size]];
     
     NSArray *animations = nil;
-        animations = @[center,scale];
+    animations = @[center,scale];
     
     
     CAAnimationGroup *group = [CAAnimationGroup animation];
@@ -140,14 +114,64 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
         UIWindow *window = [app keyWindow];
         [window addSubview:self.imageView];
     }
-    else
-    {
-//        [self downLoadPage];
-    }
-    
 }
 
-#pragma mark gesture
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    CABasicAnimation *scale = [CABasicAnimation animationWithKeyPath:@"bounds"];
+    ;
+    scale.fromValue = [NSValue valueWithCGRect:self.imageView.frame];
+    scale.toValue = [NSValue valueWithCGRect:self.translateFrame];
+    
+    CABasicAnimation *center = [CABasicAnimation animationWithKeyPath:@"position"];
+    
+    center.fromValue = [NSValue valueWithCGPoint:self.imageView.layer.position];
+    center.toValue = [NSValue valueWithCGPoint:CGPointMake(self.translateFrame.origin.x + self.translateFrame.size.width / 2, self.translateFrame.origin.y + self.translateFrame.size.height / 2)];
+    
+    NSArray *animations = @[center,scale];
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    group.animations = animations;
+    [group setValue:@"dismiss" forKey:@"type-dismiss"];
+    group.delegate = self;
+    group.duration = .3;
+    self.imageView.layer.position = [center.toValue CGPointValue];
+    self.imageView.layer.bounds = [scale.toValue CGRectValue];
+    [self.imageView.layer addAnimation:group forKey:nil];
+}
+
+#pragma mark - init component
+
+- (void)initImageView
+{
+    self.imageView = [[UIImageView alloc] initWithFrame:self.translateFrame];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.image = self.image;
+    self.imageView.frame = self.translateFrame;
+    [self.imageView.layer setMasksToBounds:YES];
+    [self.zoomView addSubview:self.imageView];
+}
+
+- (void)initZoomView
+{
+    self.zoomView = [[UIScrollView alloc] init];
+    self.zoomView.delegate = self;
+    self.zoomView.frame = self.view.bounds;
+    self.zoomView.minimumZoomScale = 1;
+    self.zoomView.maximumZoomScale = 3.0;
+    self.zoomView.scrollEnabled = YES;
+    self.zoomView.showsHorizontalScrollIndicator = NO;
+    self.zoomView.showsVerticalScrollIndicator = NO;
+    self.zoomView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self addGestureRecognizerOn:self.zoomView];
+    self.zoomView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width / scale(_image.size));
+    [self.view addSubview:self.zoomView];
+}
+
+#pragma mark gesture and event
 - (void)addGestureRecognizerOn:(UIView *)objView;
 {
     UITapGestureRecognizer *singleOneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -163,34 +187,6 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     [objView addGestureRecognizer:longPress];
     [objView addGestureRecognizer:singleTwoTap];
     [objView addGestureRecognizer:singleOneTap];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    CABasicAnimation *scale = [CABasicAnimation animationWithKeyPath:@"bounds"];
-    ;
-    scale.fromValue = [NSValue valueWithCGRect:self.imageView.frame];
-    scale.toValue = [NSValue valueWithCGRect:self.translateFrame];
-    
-    CABasicAnimation *center = [CABasicAnimation animationWithKeyPath:@"position"];
-    
-    center.fromValue = [NSValue valueWithCGPoint:self.imageView.layer.position];
-    center.toValue = [NSValue valueWithCGPoint:CGPointMake(self.translateFrame.origin.x + self.translateFrame.size.width / 2, self.translateFrame.origin.y + self.translateFrame.size.height / 2)];
-    
-    
-    NSArray *animations = @[center,scale];
-
-    
-    CAAnimationGroup *group = [CAAnimationGroup animation];
-    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    group.animations = animations;
-    [group setValue:@"dismiss" forKey:@"type-dismiss"];
-    group.delegate = self;
-    group.duration = .3;
-    self.imageView.layer.position = [center.toValue CGPointValue];
-    self.imageView.layer.bounds = [scale.toValue CGRectValue];
-    [self.imageView.layer addAnimation:group forKey:nil];
 }
 
 - (void)handleTap:(UIGestureRecognizer *)sender
@@ -235,6 +231,8 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
+#pragma mark animate
+
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if ([anim valueForKey:@"type-dismiss"])
@@ -250,22 +248,14 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
 
 - (void)animationDidStart:(CAAnimation *)anim
 {
-    if ([anim valueForKey:@"type-dismiss"])
-    {
-        
-    }
+    if ([anim valueForKey:@"type-dismiss"]){};
 }
 
 - (void)viewDisAppearAnimate:(NSString *)value
 {
     //完成移动image的位置，将之前隐藏的图片显示，从window中移除self.imageView
     if ([value isEqualToString:@"dismiss"])
-    {
-        if (self.block)
-        {
-            self.block(nil);
-        }
-        
+    {   
         [self.imageView removeFromSuperview];
         self.thmImageView.hidden = NO;
     }
@@ -296,9 +286,8 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
                 //                [weakSelf.progressView setHidden:YES];
                 weakSelf.imageView.image = image;
                 weakSelf.isLoaded = YES;
-                CGFloat x = (image.size.width / image.size.height);
                 weakSelf.imageView.frame = [weakSelf getFrameByImageSize:image.size];
-                weakSelf.zoomView.contentSize = CGSizeMake(weakSelf.view.frame.size.width, weakSelf.view.frame.size.width / x);
+                weakSelf.zoomView.contentSize = CGSizeMake(weakSelf.view.frame.size.width, weakSelf.view.frame.size.width / scale(image.size));
             }
         
         }];
@@ -319,7 +308,7 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     }
 }
 
-#pragma mark - Zoom methods
+#pragma mark - Zoom methods scrollview delegate
 
 - (void)zoomImage:(UIGestureRecognizer *)gesture
 {
@@ -329,8 +318,6 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     [self.zoomView zoomToRect:zoomRect animated:YES];
     isZoom = isBigger(self.imageView.frame.size, [UIScreen mainScreen].bounds.size);
 }
-
-#pragma mark - scrollview delegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
@@ -372,7 +359,7 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
     zoomRect.origin.y = center.y;
     return zoomRect;
 }
-//翻页后重置放大过后的frame
+
 - (void)resetImageFrame
 {
     [self.zoomView setZoomScale:1 animated:NO];
@@ -381,7 +368,6 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     switch (buttonIndex)
     {
         case SavePic:

@@ -7,12 +7,13 @@
 //
 
 #import "ViewController.h"
+typedef void (^finishBlock)(BOOL isCurrent);
 
 @interface PhotosBrowserController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *zoomViewControllers;
 @property (nonatomic, strong) NSArray *photos;
 
-- (instancetype)initWithImageArr:(NSArray *)imageArr imageIndex:(NSInteger)index;
+- (instancetype)initWithImageArr:(NSArray *)imageArr imageIndex:(NSInteger)index finish:(finishBlock)block;
 
 @end

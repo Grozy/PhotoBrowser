@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 @interface PhotoItem : NSObject
 
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *urlString;
+@property (nonatomic, copy) NSString *thumUrlString;
 @property (nonatomic, weak) UIImageView *thumImageView;
 @property (nonatomic, assign) CGRect itemFrame;
 

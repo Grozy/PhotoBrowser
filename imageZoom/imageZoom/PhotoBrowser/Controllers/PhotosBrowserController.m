@@ -18,16 +18,18 @@
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @property (nonatomic, strong) BrowserToolbar *toolBar;
 @property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, copy) finishBlock block;
 @end
 
 @implementation PhotosBrowserController
 
-- (instancetype)initWithImageArr:(NSArray *)imageArr imageIndex:(NSInteger)index;
+- (instancetype)initWithImageArr:(NSArray *)imageArr imageIndex:(NSInteger)index finish:(finishBlock)block
 {
     if (self = [super init])
     {
         self.photos = imageArr;
         self.currentIndex = index;
+        self.block = block;
         self.zoomViewControllers = [@[] mutableCopy];
         self.view.backgroundColor = [UIColor blackColor];
     }
@@ -79,7 +81,7 @@
         {[UIScreen mainScreen].bounds.size.width   ,KToolBarHeight}
     }];
     [self.toolBar setCurrentPageNumber:self.currentIndex + 1 andTotoal:self.photos.count];
-    self.toolBar.backgroundColor = [UIColor lightGrayColor];
+    self.toolBar.backgroundColor = [UIColor whiteColor];
     self.toolBar.alpha = 0.9;
     [self.view addSubview:self.toolBar];
 }
@@ -111,7 +113,7 @@
         
         UIView *zoomView = [[UIView alloc] initWithFrame:CGRectMake(idx * (KSpace + mainScreenSize.width), 0, mainScreenSize.width,mainScreenSize.height)];
         zoomView.backgroundColor = [UIColor blackColor];
-        ZoomViewController *viewController = [[ZoomViewController alloc] initWithImageView:obj finish:nil];
+        ZoomViewController *viewController = [[ZoomViewController alloc] initWithImageView:obj finish:self.block];
         if (idx != _currentIndex)
         {
             [viewController.view setHidden:YES];

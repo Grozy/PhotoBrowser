@@ -37,7 +37,7 @@
         [imageView addGestureRecognizer:tap];
         
         PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:imageView];
-        zoomItem.url = array[i]
+        zoomItem.url = array[i];
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];
     }
@@ -50,6 +50,7 @@
     {
         UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
         
+        //获得缩略图的frame 不知道为什么在创建imageView的时候获得的有问题，可能是因为在绘制的过程中cell的位置还没有固定吧
         for (PhotoItem *item in self.thumImageArray)
         {
             [item initItemFrame];

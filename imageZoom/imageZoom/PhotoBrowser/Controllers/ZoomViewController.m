@@ -8,7 +8,7 @@
 
 #import "ZoomViewController.h"
 #import "UIImageView+WebCache.h"
-
+#import "SDWebImageManager.h"
 @interface ZoomViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic,strong) UIImage *image;
@@ -16,6 +16,7 @@
 @property (nonatomic,strong) UIScrollView *zoomView;
 @property (nonatomic,assign) CGRect translateFrame;
 @property (nonatomic,copy) NSString *imageName;
+@property (nonatomic, strong) NSURL *url;
 @property (nonatomic,copy) finishBlock block;
 
 @end
@@ -29,6 +30,7 @@
         self.image = [zoomItem.thumImageView.image copy];
         self.thmImageView = zoomItem.thumImageView;
         self.translateFrame = zoomItem.itemFrame;
+        self.url = [NSURL URLWithString:[zoomItem.url stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"]];
         self.block = block;
         self.view.backgroundColor = [UIColor blackColor];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
@@ -135,6 +137,10 @@
         UIWindow *window = [app keyWindow];
         [window addSubview:self.imageView];
     }
+    else
+    {
+//        [self downLoadPage];
+    }
     
 }
 
@@ -180,15 +186,12 @@
 {
     if ([anim valueForKey:@"type-dismiss"])
     {
-        if (self.isCurrentPage)
-        {
-            [self.imageView removeFromSuperview];
-            self.thmImageView.hidden = NO;
-        }
+        [self viewDisAppearAnimate:[anim valueForKey:@"type-dismiss"]];
     }
     else if ([anim valueForKey:@"type-appear"])
     {
         self.view.hidden = NO;
+        [self viewAppearAnimate:[anim valueForKey:@"type-appear"]];
     }
 }
 
@@ -197,6 +200,56 @@
     if ([anim valueForKey:@"type-dismiss"])
     {
         
+        
+    }
+}
+
+- (void)viewDisAppearAnimate:(NSString *)value
+{
+    //完成移动image的位置，将之前隐藏的图片显示，从window中移除self.imageView
+    if ([value isEqualToString:@"dismiss"])
+    {
+        if (self.block)
+        {
+            self.block(nil);
+        }
+        
+        [self.imageView removeFromSuperview];
+        self.thmImageView.hidden = NO;
+    }
+}
+
+- (void)viewAppearAnimate:(NSString *)value
+{
+    if ([value isEqualToString:@"appear"])
+    {
+        if (self.imageView.frame.size.height > [UIScreen mainScreen].bounds.size.height)
+        {
+            [UIView beginAnimations:nil context:nil];
+            [UIView animateWithDuration:.55 animations:^{
+                self.imageView.frame = CGRectMake(0, 0, self.zoomView.contentSize.width, self.zoomView.contentSize.height);
+            }];
+            [UIView commitAnimations];
+        }
+        
+        [self.imageView setImage:self.image];
+        
+        __weak ZoomViewController *weakSelf = self;
+
+        [[SDWebImageManager sharedManager] downloadWithURL:self.url options:SDWebImageRetryFailed progress:^(NSUInteger receivedSize, long long expectedSize) {
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+            if (!error && image)
+            {
+                //                [weakSelf.progressView setHidden:YES];
+                weakSelf.imageView.image = image;
+                //                weakSelf.isLoaded = YES;
+                CGFloat x = (image.size.width / image.size.height);
+                weakSelf.imageView.frame = [weakSelf getFrameByImageSize:image.size];
+                weakSelf.zoomView.contentSize = CGSizeMake(weakSelf.view.frame.size.width, weakSelf.view.frame.size.width / x);
+            }
+        
+        }];
         
     }
 }

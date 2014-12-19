@@ -9,6 +9,19 @@
 #import "ViewController.h"
 #import "PhotoItem.h"
 
+//判读a的size是不是大于b的 如果为真 返回YES 否者为NO
+static inline bool isBigger(const CGSize a,const CGSize b)
+{
+    if ((a.height > b.height)||(a.width > b.width))
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 typedef void (^finishBlock)(BOOL isCurrent);
 
 @interface ZoomViewController : UIViewController

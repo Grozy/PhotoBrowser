@@ -21,6 +21,12 @@
     return self;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+}
+
 - (void)setImages:(NSArray *)array
 {
     for(int i= 0;i < array.count;i++)
@@ -38,6 +44,7 @@
         
         PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:imageView];
         zoomItem.url = array[i];
+        //曾经尝试在这里获得imageView的frame 但是
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];
     }
@@ -49,13 +56,6 @@
     if ([self.delegate respondsToSelector:@selector(imageClick:thumImageArray:atIndex:)])
     {
         UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
-        
-        //获得缩略图的frame 不知道为什么在创建imageView的时候获得的有问题，可能是因为在绘制的过程中cell的位置还没有固定吧
-        for (PhotoItem *item in self.thumImageArray)
-        {
-            [item initItemFrame];
-        }
-
         [self.delegate imageClick:imageView thumImageArray:self.thumImageArray atIndex:(imageView.tag - KBaseTag)];
     }
 }

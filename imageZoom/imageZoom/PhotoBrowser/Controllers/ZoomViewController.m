@@ -9,14 +9,21 @@
 #import "ZoomViewController.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
-@interface ZoomViewController ()<UIScrollViewDelegate>
-
+typedef NS_ENUM(NSUInteger, ActionSheetIndex)
+{
+    SavePic,
+};
+@interface ZoomViewController ()<UIScrollViewDelegate,UIActionSheetDelegate>
+{
+    BOOL isZoom;
+}
 @property (nonatomic,strong) UIImage *image;
 @property (nonatomic,strong) UIImageView *thmImageView;
 @property (nonatomic,strong) UIScrollView *zoomView;
 @property (nonatomic,assign) CGRect translateFrame;
 @property (nonatomic,copy) NSString *imageName;
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic,assign) BOOL isLoaded;
 @property (nonatomic,copy) finishBlock block;
 
 @end
@@ -32,6 +39,9 @@
         self.translateFrame = zoomItem.itemFrame;
         self.url = [NSURL URLWithString:[zoomItem.url stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"]];
         self.block = block;
+        self.isLoaded = YES;
+        isZoom = NO;
+
         self.view.backgroundColor = [UIColor blackColor];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }
@@ -69,18 +79,11 @@
     self.zoomView.showsHorizontalScrollIndicator = NO;
     self.zoomView.showsVerticalScrollIndicator = NO;
     self.zoomView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self addGestureRecognizerOn:self.zoomView];
     CGFloat x = (self.image.size.width / self.image.size.height);
     self.zoomView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width / x);
     [self.view addSubview:self.zoomView];
     
-    [self addGestureRecognizerTo:self.zoomView];
-}
-
-- (void)addGestureRecognizerTo:(UIScrollView *)scrollView
-{
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disMiss)];
-    [scrollView addGestureRecognizer:tap];
-    [scrollView setUserInteractionEnabled:YES];
 }
 
 - (void)viewDidLoad
@@ -144,6 +147,24 @@
     
 }
 
+#pragma mark gesture
+- (void)addGestureRecognizerOn:(UIView *)objView;
+{
+    UITapGestureRecognizer *singleOneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    singleOneTap.numberOfTapsRequired = 1;
+    
+    UITapGestureRecognizer *singleTwoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    singleTwoTap.numberOfTapsRequired = 2;
+    //阻止手势混淆
+    [singleOneTap requireGestureRecognizerToFail:singleTwoTap];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    
+    [objView addGestureRecognizer:longPress];
+    [objView addGestureRecognizer:singleTwoTap];
+    [objView addGestureRecognizer:singleOneTap];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -170,6 +191,38 @@
     self.imageView.layer.position = [center.toValue CGPointValue];
     self.imageView.layer.bounds = [scale.toValue CGRectValue];
     [self.imageView.layer addAnimation:group forKey:nil];
+}
+
+- (void)handleTap:(UIGestureRecognizer *)sender
+{
+    if ([sender isKindOfClass:[UITapGestureRecognizer class]]) {
+        UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
+        if (tap.numberOfTapsRequired == 2)
+        {
+            self.zoomView.userInteractionEnabled = NO;//放大图片过程中 屏蔽手势
+            [self zoomImage:sender];
+        }
+        else if(tap.numberOfTapsRequired == 1)
+        {
+            [self disMiss];
+        }
+    }
+    else if ([sender isKindOfClass:[UILongPressGestureRecognizer class]])
+    {
+        UILongPressGestureRecognizer *longPress = (UILongPressGestureRecognizer *)sender;
+        if (longPress.state == UIGestureRecognizerStateEnded) {
+            
+            return;
+            
+        } else if (longPress.state == UIGestureRecognizerStateBegan) {
+            //TODO
+            if (self.isLoaded == YES)
+            {
+                UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", @"Feed", @"取消")destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"image_save_album", @"Feed", @"保存到相册"),nil];
+                [sheet showInView:self.view];
+            }
+        }
+    }
 }
 
 - (void)disMiss
@@ -199,7 +252,6 @@
 {
     if ([anim valueForKey:@"type-dismiss"])
     {
-        
         
     }
 }
@@ -237,13 +289,13 @@
         __weak ZoomViewController *weakSelf = self;
 
         [[SDWebImageManager sharedManager] downloadWithURL:self.url options:SDWebImageRetryFailed progress:^(NSUInteger receivedSize, long long expectedSize) {
-            
+            weakSelf.isLoaded = NO;
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
             if (!error && image)
             {
                 //                [weakSelf.progressView setHidden:YES];
                 weakSelf.imageView.image = image;
-                //                weakSelf.isLoaded = YES;
+                weakSelf.isLoaded = YES;
                 CGFloat x = (image.size.width / image.size.height);
                 weakSelf.imageView.frame = [weakSelf getFrameByImageSize:image.size];
                 weakSelf.zoomView.contentSize = CGSizeMake(weakSelf.view.frame.size.width, weakSelf.view.frame.size.width / x);
@@ -267,6 +319,17 @@
     }
 }
 
+#pragma mark - Zoom methods
+
+- (void)zoomImage:(UIGestureRecognizer *)gesture
+{
+    isZoom = !isZoom;
+    float newScale = isZoom?3:1;
+    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gesture locationInView:gesture.view]];
+    [self.zoomView zoomToRect:zoomRect animated:YES];
+    isZoom = isBigger(self.imageView.frame.size, [UIScreen mainScreen].bounds.size);
+}
+
 #pragma mark - scrollview delegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -283,6 +346,7 @@
 {
     CGSize boundSize = scrollView.bounds.size;
     CGRect frameToCenter = self.imageView.frame;
+    isZoom = isBigger(self.imageView.frame.size, [UIScreen mainScreen].bounds.size);
     
     // center horizontally
     if (frameToCenter.size.width < boundSize.width)
@@ -308,10 +372,37 @@
     zoomRect.origin.y = center.y;
     return zoomRect;
 }
-
+//翻页后重置放大过后的frame
 - (void)resetImageFrame
 {
     [self.zoomView setZoomScale:1 animated:NO];
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    switch (buttonIndex)
+    {
+        case SavePic:
+            UIImageWriteToSavedPhotosAlbum([self.imageView image], self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error != NULL)
+    {
+//        [self showWarningView:NSLocalizedStringFromTable(@"album_author_notify", @"Feed", nil)];
+    }
+    else
+    {
+//        [self showInfoView:@"已保存到手机相册"];
+    }
 }
 
 @end

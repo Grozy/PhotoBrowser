@@ -54,12 +54,14 @@
     });
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -67,8 +69,11 @@
 - (void)setUp
 {
     [self initScrollView];
-    [self addPhotosInScrollView];
-    
+    [self initToolBar];
+}
+//添加toolBar
+- (void)initToolBar
+{
     self.toolBar = [[BrowserToolbar alloc] initWithFrame:(CGRect){
         {0   ,[UIScreen mainScreen].bounds.size.height - KToolBarHeight},
         {[UIScreen mainScreen].bounds.size.width   ,KToolBarHeight}
@@ -78,7 +83,7 @@
     self.toolBar.alpha = 0.9;
     [self.view addSubview:self.toolBar];
 }
-
+//添加ScrollView 多图浏览用
 - (void)initScrollView
 {
     CGSize mainScreenSize = [UIScreen mainScreen].bounds.size;
@@ -95,8 +100,10 @@
     self.mainScrollView.contentOffset = CGPointMake(_currentIndex * (mainScreenSize.width + KSpace), 0);
     
     [self.view addSubview:self.mainScrollView];
+    
+    [self addPhotosInScrollView];
 }
-
+//将多组viewController添加到scrollView上
 - (void)addPhotosInScrollView
 {
     CGSize mainScreenSize = [UIScreen mainScreen].bounds.size;
@@ -127,11 +134,6 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.toolBar show:0.3f];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

@@ -18,10 +18,10 @@
     }
     return self;
 }
-
-- (void)initItemFrame
+//重写get方法 获得itemFrame
+- (CGRect)itemFrame
 {
-    _itemFrame = [self.thumImageView.superview convertRect:self.thumImageView.frame toView:[[UIApplication sharedApplication] keyWindow]];
+    return [self.thumImageView.superview convertRect:self.thumImageView.frame toView:[[UIApplication sharedApplication] keyWindow]];
 }
 
 @end

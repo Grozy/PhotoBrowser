@@ -16,8 +16,4 @@
 
 - (instancetype)initWithImageView:(UIImageView *)thumImageView;
 
-/**
- 获得thumImageView在view中的位置
- */
-- (void)initItemFrame;
 @end

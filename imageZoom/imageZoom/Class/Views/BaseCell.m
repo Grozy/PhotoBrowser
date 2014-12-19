@@ -9,6 +9,7 @@
 #import "BaseCell.h"
 #define KBaseTag 10000
 #import "PhotoItem.h"
+#import "UIImageView+WebCache.h"
 @implementation BaseCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -34,9 +35,13 @@
 {
     for(int i= 0;i < array.count;i++)
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((10 + 70) * i +10, 10, 50, 50)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((10 + 80) * i +10, 10, 80, 80)];
         [imageView setUserInteractionEnabled:YES];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [imageView.layer setMasksToBounds:YES];
         imageView.image = [UIImage imageNamed:array[i]];
+        [imageView setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[UIImage imageNamed:@"0"]];
+        
         imageView.tag = KBaseTag + i;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
         [imageView addGestureRecognizer:tap];

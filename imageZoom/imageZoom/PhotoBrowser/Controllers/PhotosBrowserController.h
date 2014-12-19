@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface PhotosBroswerController : UIViewController
+@interface PhotosBrowserController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *zoomViewControllers;
 @property (nonatomic, strong) NSArray *photos;

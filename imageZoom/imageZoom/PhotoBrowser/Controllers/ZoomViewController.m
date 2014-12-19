@@ -7,7 +7,7 @@
 //
 
 #import "ZoomViewController.h"
-
+#import "UIImageView+WebCache.h"
 
 @interface ZoomViewController ()<UIScrollViewDelegate>
 
@@ -32,8 +32,6 @@
         self.block = block;
         self.view.backgroundColor = [UIColor blackColor];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        
-        
     }
     return self;
 }
@@ -41,6 +39,25 @@
 - (void)loadView
 {
     [super loadView];
+    
+    [self initZoomView];
+    
+    [self initImageView];
+    
+}
+
+- (void)initImageView
+{
+    self.imageView = [[UIImageView alloc] initWithFrame:self.translateFrame];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.image = self.image;
+    self.imageView.frame = self.translateFrame;
+    [self.imageView.layer setMasksToBounds:YES];
+    [self.zoomView addSubview:self.imageView];
+}
+
+- (void)initZoomView
+{
     self.zoomView = [[UIScrollView alloc] init];
     self.zoomView.delegate = self;
     self.zoomView.frame = self.view.bounds;
@@ -52,19 +69,16 @@
     self.zoomView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     CGFloat x = (self.image.size.width / self.image.size.height);
     self.zoomView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.width / x);
-    
-    self.imageView = [[UIImageView alloc] initWithFrame:self.translateFrame];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.imageView.image = self.image;
-    self.imageView.frame = self.translateFrame;
-    [self.imageView.layer setMasksToBounds:YES];
-    
     [self.view addSubview:self.zoomView];
-    [self.zoomView addSubview:self.imageView];
     
+    [self addGestureRecognizerTo:self.zoomView];
+}
+
+- (void)addGestureRecognizerTo:(UIScrollView *)scrollView
+{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disMiss)];
-    [self.zoomView addGestureRecognizer:tap];
-    [self.zoomView setUserInteractionEnabled:YES];
+    [scrollView addGestureRecognizer:tap];
+    [scrollView setUserInteractionEnabled:YES];
 }
 
 - (void)viewDidLoad
@@ -202,21 +216,21 @@
 
 #pragma MARK -scrollView
 #pragma mark - scrollview delegate
-- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
-{
-    for(id subView in scrollView.subviews)
-    {
-        if([subView isKindOfClass:[UIImageView class]])
-        {
-            UIImageView *zoomImage = subView;
-            CGRect endFrame = CGRectIntersection(zoomImage.frame, self.view.bounds);
-            if (endFrame.size.height < self.view.frame.size.height || endFrame.size.width <self.view.frame.size.width)
-            {
-                zoomImage.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height / 2);
-            }
-        }
-    }
-}
+//- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
+//{
+//    for(id subView in scrollView.subviews)
+//    {
+//        if([subView isKindOfClass:[UIImageView class]])
+//        {
+//            UIImageView *zoomImage = subView;
+//            CGRect endFrame = CGRectIntersection(zoomImage.frame, self.view.bounds);
+//            if (endFrame.size.height < self.view.frame.size.height || endFrame.size.width <self.view.frame.size.width)
+//            {
+//                zoomImage.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height / 2);
+//            }
+//        }
+//    }
+//}
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {

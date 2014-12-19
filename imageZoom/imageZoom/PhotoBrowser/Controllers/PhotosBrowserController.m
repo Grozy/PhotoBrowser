@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 孙国志. All rights reserved.
 //
 
-#import "PhotosBroswerController.h"
+#import "PhotosBrowserController.h"
 #import "ZoomViewController.h"
 #import "BrowserToolbar.h"
 #import "PhotoItem.h"
@@ -14,13 +14,13 @@
 #define KSpace 20   //图片之间的间隙
 #define KToolBarHeight  44  //boolBar的高度
 
-@interface PhotosBroswerController ()<UIScrollViewDelegate>
+@interface PhotosBrowserController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *mainScrollView;
 @property (nonatomic, strong) BrowserToolbar *toolBar;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
 
-@implementation PhotosBroswerController
+@implementation PhotosBrowserController
 
 - (instancetype)initWithImageArr:(NSArray *)imageArr imageIndex:(NSInteger)index;
 {

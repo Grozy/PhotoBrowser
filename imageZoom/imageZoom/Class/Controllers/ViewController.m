@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "PhotosBroswerController.h"
+#import "PhotosBrowserController.h"
 #import "AFNetworking.h"
 #import "PhotoItem.h"
 #import "BaseCell.h"
@@ -26,7 +26,7 @@
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
-    self.array = @[@"0",@"1",@"2",@"3"];
+    self.array = @[@[@"http://ww4.sinaimg.cn/thumbnail/7f8c1087gw1e9g06pc68ug20ag05y4qq.gif", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg"],@[ @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1d0vyj20pf0gytcj.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr2n1jjj20gy0o9tcc.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr39ht9j20gy0o6q74.jpg"], @[@"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr3xvtlj20gy0obadv.jpg", @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr57tn9j20gy0obn0f.jpg"]];
 }
 
 - (void)viewDidLoad {
@@ -55,18 +55,18 @@
         cell = [[BaseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
         cell.delegate = self;
     }
-    [cell setImages:self.array];
+    [cell setImages:self.array[indexPath.row]];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.array.count;
 }
 
 - (void)imageClick:(UIImageView *)imageView thumImageArray:(NSArray *)thumArray atIndex:(NSInteger)index
 {
-    PhotosBroswerController *zoomViewsViewController = [[PhotosBroswerController alloc] initWithImageArr:thumArray imageIndex:index];
+    PhotosBrowserController *zoomViewsViewController = [[PhotosBrowserController alloc] initWithImageArr:thumArray imageIndex:index];
     [self presentViewController:zoomViewsViewController animated:NO completion:nil];
 }
 @end

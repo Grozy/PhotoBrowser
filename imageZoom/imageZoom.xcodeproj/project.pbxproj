@@ -36,10 +36,10 @@
 		8CA2BDD51A0A234700219872 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2BDC41A0A234700219872 /* UIProgressView+AFNetworking.m */; };
 		8CA2BDD61A0A234700219872 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2BDC61A0A234700219872 /* UIWebView+AFNetworking.m */; };
 		8CA2BDD91A0A296500219872 /* MyConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2BDD81A0A296500219872 /* MyConnectionOperation.m */; };
-		8CD8E4BE1A44008D002E85C2 /* BrowserToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8E4B71A44008D002E85C2 /* BrowserToolbar.m */; };
-		8CD8E4BF1A44008D002E85C2 /* PhotosBroswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8E4B91A44008D002E85C2 /* PhotosBroswerController.m */; };
-		8CD8E4C01A44008D002E85C2 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8E4BB1A44008D002E85C2 /* PhotoItem.m */; };
-		8CD8E4C11A44008D002E85C2 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8E4BD1A44008D002E85C2 /* ZoomViewController.m */; };
+		8CEF7BE81A4405C100F894C3 /* PhotosBroswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BDF1A4405C100F894C3 /* PhotosBroswerController.m */; };
+		8CEF7BE91A4405C100F894C3 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BE11A4405C100F894C3 /* ZoomViewController.m */; };
+		8CEF7BEA1A4405C100F894C3 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BE41A4405C100F894C3 /* PhotoItem.m */; };
+		8CEF7BEB1A4405C100F894C3 /* BrowserToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF7BE71A4405C100F894C3 /* BrowserToolbar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,14 +108,14 @@
 		8CA2BDC61A0A234700219872 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		8CA2BDD71A0A296500219872 /* MyConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConnectionOperation.h; sourceTree = "<group>"; };
 		8CA2BDD81A0A296500219872 /* MyConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConnectionOperation.m; sourceTree = "<group>"; };
-		8CD8E4B61A44008D002E85C2 /* BrowserToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserToolbar.h; sourceTree = "<group>"; };
-		8CD8E4B71A44008D002E85C2 /* BrowserToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserToolbar.m; sourceTree = "<group>"; };
-		8CD8E4B81A44008D002E85C2 /* PhotosBroswerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosBroswerController.h; sourceTree = "<group>"; };
-		8CD8E4B91A44008D002E85C2 /* PhotosBroswerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosBroswerController.m; sourceTree = "<group>"; };
-		8CD8E4BA1A44008D002E85C2 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
-		8CD8E4BB1A44008D002E85C2 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
-		8CD8E4BC1A44008D002E85C2 /* ZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomViewController.h; sourceTree = "<group>"; };
-		8CD8E4BD1A44008D002E85C2 /* ZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomViewController.m; sourceTree = "<group>"; };
+		8CEF7BDE1A4405C100F894C3 /* PhotosBroswerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosBroswerController.h; sourceTree = "<group>"; };
+		8CEF7BDF1A4405C100F894C3 /* PhotosBroswerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosBroswerController.m; sourceTree = "<group>"; };
+		8CEF7BE01A4405C100F894C3 /* ZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomViewController.h; sourceTree = "<group>"; };
+		8CEF7BE11A4405C100F894C3 /* ZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomViewController.m; sourceTree = "<group>"; };
+		8CEF7BE31A4405C100F894C3 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
+		8CEF7BE41A4405C100F894C3 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
+		8CEF7BE61A4405C100F894C3 /* BrowserToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserToolbar.h; sourceTree = "<group>"; };
+		8CEF7BE71A4405C100F894C3 /* BrowserToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserToolbar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,16 +265,40 @@
 		8CD8E4B51A44008D002E85C2 /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				8CD8E4B61A44008D002E85C2 /* BrowserToolbar.h */,
-				8CD8E4B71A44008D002E85C2 /* BrowserToolbar.m */,
-				8CD8E4B81A44008D002E85C2 /* PhotosBroswerController.h */,
-				8CD8E4B91A44008D002E85C2 /* PhotosBroswerController.m */,
-				8CD8E4BA1A44008D002E85C2 /* PhotoItem.h */,
-				8CD8E4BB1A44008D002E85C2 /* PhotoItem.m */,
-				8CD8E4BC1A44008D002E85C2 /* ZoomViewController.h */,
-				8CD8E4BD1A44008D002E85C2 /* ZoomViewController.m */,
+				8CEF7BDD1A4405C100F894C3 /* Controllers */,
+				8CEF7BE21A4405C100F894C3 /* Model */,
+				8CEF7BE51A4405C100F894C3 /* Views */,
 			);
 			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		8CEF7BDD1A4405C100F894C3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8CEF7BDE1A4405C100F894C3 /* PhotosBroswerController.h */,
+				8CEF7BDF1A4405C100F894C3 /* PhotosBroswerController.m */,
+				8CEF7BE01A4405C100F894C3 /* ZoomViewController.h */,
+				8CEF7BE11A4405C100F894C3 /* ZoomViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8CEF7BE21A4405C100F894C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8CEF7BE31A4405C100F894C3 /* PhotoItem.h */,
+				8CEF7BE41A4405C100F894C3 /* PhotoItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8CEF7BE51A4405C100F894C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8CEF7BE61A4405C100F894C3 /* BrowserToolbar.h */,
+				8CEF7BE71A4405C100F894C3 /* BrowserToolbar.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,9 +406,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA2BDCC1A0A234700219872 /* AFURLConnectionOperation.m in Sources */,
-				8CD8E4BF1A44008D002E85C2 /* PhotosBroswerController.m in Sources */,
+				8CEF7BE81A4405C100F894C3 /* PhotosBroswerController.m in Sources */,
 				8CA2BD8C1A09CEE900219872 /* BaseCell.m in Sources */,
 				8CA2BDD51A0A234700219872 /* UIProgressView+AFNetworking.m in Sources */,
+				8CEF7BE91A4405C100F894C3 /* ZoomViewController.m in Sources */,
 				8CA2BD6D1A09CEDA00219872 /* ViewController.m in Sources */,
 				8CA2BDD21A0A234700219872 /* UIAlertView+AFNetworking.m in Sources */,
 				8CA2BD6A1A09CEDA00219872 /* AppDelegate.m in Sources */,
@@ -392,15 +417,14 @@
 				8CA2BDD31A0A234700219872 /* UIButton+AFNetworking.m in Sources */,
 				8CA2BDD11A0A234700219872 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8CA2BDCD1A0A234700219872 /* AFURLRequestSerialization.m in Sources */,
-				8CD8E4BE1A44008D002E85C2 /* BrowserToolbar.m in Sources */,
 				8CA2BDD01A0A234700219872 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8CA2BDCB1A0A234700219872 /* AFSecurityPolicy.m in Sources */,
 				8CA2BDC71A0A234700219872 /* AFHTTPRequestOperation.m in Sources */,
+				8CEF7BEA1A4405C100F894C3 /* PhotoItem.m in Sources */,
 				8CA2BDCF1A0A234700219872 /* AFURLSessionManager.m in Sources */,
 				8CA2BD671A09CEDA00219872 /* main.m in Sources */,
-				8CD8E4C01A44008D002E85C2 /* PhotoItem.m in Sources */,
 				8CA2BDD61A0A234700219872 /* UIWebView+AFNetworking.m in Sources */,
-				8CD8E4C11A44008D002E85C2 /* ZoomViewController.m in Sources */,
+				8CEF7BEB1A4405C100F894C3 /* BrowserToolbar.m in Sources */,
 				8CA2BDD91A0A296500219872 /* MyConnectionOperation.m in Sources */,
 				8CA2BDC91A0A234700219872 /* AFHTTPSessionManager.m in Sources */,
 				8CA2BDCA1A0A234700219872 /* AFNetworkReachabilityManager.m in Sources */,

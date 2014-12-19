@@ -22,7 +22,7 @@
 
 @implementation ZoomViewController
 
-- (instancetype)initWithImageView:(ZoomItem *)zoomItem finish:(finishBlock)block;
+- (instancetype)initWithImageView:(PhotoItem *)zoomItem finish:(finishBlock)block;
 {
     if (self = [super init])
     {

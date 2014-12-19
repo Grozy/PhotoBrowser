@@ -8,7 +8,7 @@
 
 #import "BaseCell.h"
 #define KBaseTag 10000
-#import "ZoomItem.h"
+#import "PhotoItem.h"
 @implementation BaseCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -40,7 +40,7 @@
         imageView.tag = KBaseTag + i;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
         [imageView addGestureRecognizer:tap];
-        ZoomItem *zoomItem = [[ZoomItem alloc] initWithImageView:imageView];
+        PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:imageView];
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];
     }
@@ -53,7 +53,7 @@
     {
         UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
         
-        for (ZoomItem *item in self.thumImageArray)
+        for (PhotoItem *item in self.thumImageArray)
         {
             [item initItemFrame];
         }

@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "PhotosBroswerController.h"
 #import "AFNetworking.h"
-#import "ZoomItem.h"
+#import "PhotoItem.h"
 #import "BaseCell.h"
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,ImageClickDelegate>
 @property (nonatomic, strong) UITableView *tableView;

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ZoomItem.h"
+#import "PhotoItem.h"
 
 typedef void (^finishBlock)(BOOL isCurrent);
 
@@ -16,6 +16,6 @@ typedef void (^finishBlock)(BOOL isCurrent);
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic, assign) BOOL isCurrentPage;
 
-- (instancetype)initWithImageView:(ZoomItem *)zoomItem finish:(finishBlock)block;
+- (instancetype)initWithImageView:(PhotoItem *)zoomItem finish:(finishBlock)block;
 - (void)resetImageFrame;
 @end

@@ -66,6 +66,8 @@ typedef NS_ENUM(NSUInteger, ActionSheetIndex)
         self.image = [photoItem.thumImageView.image copy];
         self.thmImageView = photoItem.thumImageView;
         self.translateFrame = photoItem.itemFrame;
+        
+        NSLog(@"%d",self.navigationController.navigationBarHidden);
         self.url = [NSURL URLWithString:photoItem.urlString];
         self.block = block;
         self.isLoaded = YES;

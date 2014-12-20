@@ -24,7 +24,8 @@
     /*
      * 当在init ZoomViewController遍历的过程中 再次调用itemFframe的get方法时，statusBar会隐藏 导致有20pix误差
      */
-    if ([UIApplication sharedApplication].statusBarHidden) {
+    if (self.tag > 0 && [UIApplication sharedApplication].statusBarHidden)
+    {
         CGRect frame = [self.thumImageView.superview convertRect:self.thumImageView.frame toView:[[UIApplication sharedApplication] keyWindow]];
         return CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(frame) + 20, CGRectGetWidth(frame), CGRectGetHeight(frame));
     }

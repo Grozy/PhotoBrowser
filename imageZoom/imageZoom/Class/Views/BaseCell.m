@@ -45,6 +45,7 @@
         PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:imageView];
         zoomItem.thumUrlString = array[i];
         zoomItem.urlString = [array[i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        zoomItem.tag = i;
         //曾经尝试在这里获得imageView的frame 但是
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];

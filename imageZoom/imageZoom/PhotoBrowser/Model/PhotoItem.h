@@ -30,6 +30,8 @@
  */
 @property (nonatomic, assign, readonly) CGRect itemFrame;
 
+@property (nonatomic, assign) NSInteger tag;
+
 /**
  * 初始化PhotoItem
  * @param thumImageView 缩略图的UIImageView对象

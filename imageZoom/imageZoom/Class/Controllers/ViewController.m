@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "PhotosBrowserController.h"
-#import "AFNetworking.h"
 #import "PhotoItem.h"
 #import "BaseCell.h"
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,ImageClickDelegate>
@@ -21,10 +20,19 @@
 - (void)loadView
 {
     [super loadView];
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.tableView];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_tableView);
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableView]-0-|" options:NSLayoutFormatAlignAllBaseline metrics:nil views:views];
+
+    [self.view addConstraints:constraints];
+     ;
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableView]-0-|" options:NSLayoutFormatAlignAllBaseline metrics:nil views:views];
+    [self.view addConstraints:constraints];
     
     self.array = @[@[@"http://ww4.sinaimg.cn/thumbnail/7f8c1087gw1e9g06pc68ug20ag05y4qq.gif", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg"],@[ @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1d0vyj20pf0gytcj.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr2n1jjj20gy0o9tcc.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr39ht9j20gy0o6q74.jpg"], @[@"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr3xvtlj20gy0obadv.jpg", @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr57tn9j20gy0obn0f.jpg"]];
 }

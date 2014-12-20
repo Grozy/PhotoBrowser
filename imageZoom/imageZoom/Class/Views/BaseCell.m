@@ -44,7 +44,7 @@
         
         PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:imageView];
         zoomItem.thumUrlString = array[i];
-        zoomItem.urlString = [array[i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];;
+        zoomItem.urlString = [array[i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
         //曾经尝试在这里获得imageView的frame 但是
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];
@@ -57,6 +57,7 @@
     if ([self.delegate respondsToSelector:@selector(imageClick:thumImageArray:atIndex:)])
     {
         UIImageView *imageView = (UIImageView *)gestureRecognizer.view;
+        NSLog(@"%@",NSStringFromCGRect(((PhotoItem *)self.thumImageArray[0]).itemFrame));
         [self.delegate imageClick:imageView thumImageArray:self.thumImageArray atIndex:(imageView.tag - KBaseTag)];
     }
 }

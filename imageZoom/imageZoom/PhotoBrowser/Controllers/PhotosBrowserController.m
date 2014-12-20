@@ -15,9 +15,25 @@
 #define KToolBarHeight  44  //boolBar的高度
 
 @interface PhotosBrowserController ()<UIScrollViewDelegate>
+
+/**
+ * 用于容纳多个视图控制器用于多图浏览
+ */
 @property (nonatomic, strong) UIScrollView *mainScrollView;
+
+/**
+ * 工具栏，功能自定
+ */
 @property (nonatomic, strong) BrowserToolbar *toolBar;
+
+/**
+ * 当前显示的页面的索引
+ */
 @property (nonatomic, assign) NSInteger currentIndex;
+
+/**
+ * 回调用
+ */
 @property (nonatomic, copy) finishBlock block;
 @end
 

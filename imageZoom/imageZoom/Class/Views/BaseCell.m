@@ -49,7 +49,7 @@
         //曾经尝试在这里获得imageView的frame 但是
         [self addSubview:imageView];
         [self.thumImageArray addObject:zoomItem];
-        //123123213sadfasdfsadf
+        //123123213sadfasdfsadf/asdfasdfasdfasdf
     }
     
 }
